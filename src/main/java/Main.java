@@ -35,6 +35,7 @@ public class Main {
                 if(found == false){
                     System.out.println(command +  ": not found");
                 }
+                continue;
             }
             System.out.println(a +  ": command not found");
         }
