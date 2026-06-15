@@ -8,6 +8,9 @@ public class Main {
             System.out.print("$ ");
             String a = sc.nextLine();
             if(a.equals("exit")){break;}
+            if(a.startsWith("echo")){
+                System.out.println(a.substring(5));
+            }
             System.out.println(a +  ": command not found");
         }
     }
