@@ -15,6 +15,7 @@ public class Main {
             String command = parts[0];
             if(command.equals("pwd")){
                 System.out.println(System.getProperty("user.dir"));
+                continue;
             }
             else if(command.equals("echo") || command.equals("exit")){
                 if(command.equals("echo")){
