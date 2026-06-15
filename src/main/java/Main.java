@@ -13,11 +13,7 @@ public class Main {
             if (a.isEmpty()) continue;
             String[] parts = a.trim().split("\\s+");  
             String command = parts[0];
-            if(command.equals("pwd")){
-                System.out.println(System.getProperty("user.dir"));
-                continue;
-            }
-            else if(command.equals("echo") || command.equals("exit")){
+            if(command.equals("echo") || command.equals("exit")){
                 if(command.equals("echo")){
                     for (int i = 1; i < parts.length; i++) {
                     System.out.print(parts[i]);
@@ -57,6 +53,10 @@ public class Main {
                 if(found == false){ 
                     System.out.println(target + ": not found"); 
                 }
+            }
+            else if(command.equals("pwd")){
+                System.out.println(System.getProperty("user.dir"));
+                continue;
             }
             else {
                 String fullpath = null;
