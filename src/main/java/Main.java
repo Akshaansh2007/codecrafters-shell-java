@@ -7,13 +7,13 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String path = System.getenv("PATH");
         String[] dirs = path.split(":");
+        Path currentDirectory = Paths.get(System.getProperty("user.dir"));
         while(true){
             System.out.print("$ ");
             String a = sc.nextLine();
             if (a.isEmpty()) continue;
             String[] parts = a.trim().split("\\s+");  
             String command = parts[0];
-            Path currentDirectory = Paths.get(System.getProperty("user.dir"));
             if(command.equals("echo") || command.equals("exit")){
                 if(command.equals("echo")){
                     for (int i = 1; i < parts.length; i++) {
@@ -59,7 +59,10 @@ public class Main {
                 System.out.println(currentDirectory.toAbsolutePath());
             }
             else if(command.equals("cd")){
-                String target = command.substring(3);
+                if(parts.length < 2){
+                    continue;
+                }
+                String target = parts[1];
                 Path newpath = Paths.get(target);
                 if(Files.isDirectory(newpath)){
                     currentDirectory = newpath.toAbsolutePath().normalize();
