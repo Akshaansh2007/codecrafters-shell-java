@@ -13,6 +13,7 @@ public class Main {
             if (a.isEmpty()) continue;
             String[] parts = a.trim().split("\\s+");  
             String command = parts[0];
+            Path currentDirectory = Paths.get(System.getProperty("user.dir"));
             if(command.equals("echo") || command.equals("exit")){
                 if(command.equals("echo")){
                     for (int i = 1; i < parts.length; i++) {
@@ -34,7 +35,7 @@ public class Main {
 
                 String target = parts[1];
                 
-                if(target.equals("echo") || target.equals("exit") || target.equals("type") || target.equals("pwd")){
+                if(target.equals("echo") || target.equals("exit") || target.equals("type") || target.equals("pwd") || target.equals("cd")){
                     System.out.println(target + " is a shell builtin");
                     continue;
                 }
@@ -55,8 +56,17 @@ public class Main {
                 }
             }
             else if(command.equals("pwd")){
-                System.out.println(System.getProperty("user.dir"));
-                continue;
+                System.out.println(currentDirectory.toAbsolutePath());
+            }
+            else if(command.equals("cd")){
+                String target = command.substring(3);
+                Path newpath = Paths.get(target);
+                if(Files.isDirectory(newpath)){
+                    currentDirectory = newpath.toAbsolutePath().normalize();
+                }
+                else{
+                    System.out.println("cd: " + target + ": No such file or directory");
+                }
             }
             else {
                 String fullpath = null;
