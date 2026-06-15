@@ -64,7 +64,12 @@ public class Main {
                 }
                 String target = parts[1];
                 Path newpath; 
-                if(target.startsWith("/")){
+
+                if(target.equals("~")){
+                    String h = System.getenv("HOME");
+                    newpath = Paths.get(h);
+                }
+                else if(target.startsWith("/")){
                     newpath = Paths.get(target);
                 }
                 else{
