@@ -74,9 +74,7 @@ public class Main {
 
                 try {
                     List<String> cmd = new ArrayList<>();
-                    cmd.add(fullpath);
-
-                    for(int i = 1; i < parts.length; i++){
+                    for(int i = 0; i < parts.length; i++){
                         cmd.add(parts[i]);
                     }
 
@@ -84,6 +82,7 @@ public class Main {
                     pb.inheritIO();
                     Process process = pb.start();
                     process.waitFor();
+
                 } 
                 catch (Exception e) {
                     System.out.println("Error executing command");
