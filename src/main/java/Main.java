@@ -13,7 +13,7 @@ public class Main {
                 continue;
             }
             if(a.startsWith("type")){
-                if(a.substring(5).equals("exit") || a.substring(5).equals("echo")){
+                if(a.substring(5).equals("exit") || a.substring(5).equals("echo") || a.substring(5).equals("type")){
                     System.out.println(a.substring(5) + " is a shell builtin");
                 }
                 else{
