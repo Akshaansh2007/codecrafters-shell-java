@@ -34,7 +34,7 @@ public class Main {
 
                 String target = parts[1];
                 
-                if(target.equals("echo") || target.equals("exit") || target.equals("type")){
+                if(target.equals("echo") || target.equals("exit") || target.equals("type") || target.equals("pwd")){
                     System.out.println(target + " is a shell builtin");
                     continue;
                 }
