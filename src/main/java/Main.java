@@ -1,9 +1,12 @@
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
-        // TODO: Uncomment the code below to pass the first stage
+        String path = System.getenv("PATH");
+        String[] dirs = path.split(":");
         while(true){
             System.out.print("$ ");
             String a = sc.nextLine();
@@ -13,13 +16,25 @@ public class Main {
                 continue;
             }
             if(a.startsWith("type")){
-                if(a.substring(5).equals("exit") || a.substring(5).equals("echo") || a.substring(5).equals("type")){
-                    System.out.println(a.substring(5) + " is a shell builtin");
+                String command = a.substring(5);
+                if(command.equals("exit") || command.equals("echo") || command.equals("type")){
+                    System.out.println(command + " is a shell builtin");
+                    continue;
                 }
-                else{
-                    System.out.println(a.substring( 5) +  ": not found");
+                boolean found = false;
+
+                for(String dir : dirs){
+                    Path p = Paths.get(dir, command);
+                    if(Files.exists(p) && Files.isExecutable(p)){
+                        System.out.println(command + " is "+ p);
+                        found = true;
+                        break;
+                    }
                 }
-                continue;
+
+                if(found == false){
+                    System.out.println(command +  ": not found");
+                }
             }
             System.out.println(a +  ": command not found");
         }
