@@ -63,7 +63,15 @@ public class Main {
                     continue;
                 }
                 String target = parts[1];
-                Path newpath = Paths.get(target);
+                Path newpath; 
+                if(target.startsWith("/")){
+                    newpath = Paths.get(target);
+                }
+                else{
+                    newpath = currentDirectory.resolve(target); 
+                }
+
+                newpath = newpath.normalize();  
                 if(Files.isDirectory(newpath)){
                     currentDirectory = newpath.toAbsolutePath().normalize();
                 }
